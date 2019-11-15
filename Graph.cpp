@@ -1,4 +1,5 @@
 #include "Graph.h"
+#include <queue>
 
 Graph::Graph() {
 
@@ -50,10 +51,10 @@ void Graph::display() {
 		cout << endl;
 		count++;
 	}
+	cout << endl;
 }
 
-void Graph::DFS(int start, vector<bool>& visited)
-{
+void Graph::DFS(int start, vector<bool>& visited) {
 	char print = map.at(start); // print current node
 	cout << print << "->";
 	visited[start] = true;
@@ -73,16 +74,19 @@ void Graph::ADJ(char vertex) {
 }
 
 void Graph::BFS(int start, vector<bool>& visited) {
-	cout << map.at(start) << "->"; // print the current node 
-	int count = 0;
-	for (int i : adjMat.at(start)) {
-		if (i == 1) cout << map.at(count) << "->";
-		count++;
-	}
-	visited[start] = true; // Set current node as visited in bool vector
-	for (int i = 0; i < map.size(); i++) {
-		if (adjMat[start][i] == 1 && (!visited[i])) {
-			DFS(i, visited);
+	queue <int> q; // queue 
+	visited[start] = true; 
+	q.push(start);
+	int buffer; 
+	while (q.size() != 0) {
+		buffer = q.front(); 
+		cout << map.at(buffer) << "->"; // print starting node
+		q.pop(); // pop off first item in queue
+		for (int i = 0; i < map.size(); i++) {
+			if (adjMat.at(buffer).at(i) == 1 && !visited.at(i)) {
+				visited[i] = true;
+				q.push(i);
+			}
 		}
-	}
+	} 
 }
