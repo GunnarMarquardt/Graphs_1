@@ -45,32 +45,32 @@ int main()
 	while (inCommand.is_open()) {
 		while (!inCommand.eof()) {
 			getline(inCommand, inputCommand);
-			cout << inputCommand << endl;
 			inArg = inputCommand.back(); 
-			cout << inArg << endl;
-
 			for (char d : inputCommand) { // convert to ascii
 				x = d;
 				sum += d;
 			}
-
-			cout << sum << endl; 
-
-			switch (sum) {
+			switch (sum) { // switch on what command is called in from text file 
 			case (667): { // Adjecent
-				cout << "call graphs::adjecent function " << endl;
+				cout << "Performing ADJ... " << endl;
+				graph.ADJ(inArg);
+				cout << endl << endl;
 				break;
 			}
 			case (985): { // DFS
 				cout << "Performing DFS... " << endl;
-				vector <bool> visited(5, false);
+				vector <bool> visited(graph.map.size(), false);
 				int start = graph.posOf(inArg);
 				graph.DFS(start, visited);
-				cout << endl;
+				cout << endl << endl;
 				break;
 			}
 			case (1301): { // BFS
-				cout << "call graphs::BFS function " << endl;
+				cout << "Performing BFS... " << endl;
+				vector <bool> visited(graph.map.size(), false);
+				int start = graph.posOf(inArg);
+				graph.BFS(start, visited);
+				cout << endl << endl; 
 				break;
 			}
 			case (1960): {// Connected

@@ -54,17 +54,33 @@ void Graph::display() {
 
 void Graph::DFS(int start, vector<bool>& visited)
 {
-	// Print the current node 
-	cout << start << " ";
-
-	// Set current node as visited 
+	char print = map.at(start); // print current node
+	cout << print << "->";
 	visited[start] = true;
+	for (int i = 0; i < map.size(); i++) { // visit if not already visited
+		if (adjMat[start][i] == 1 && (!visited[i])) {
+			DFS(i, visited);
+		}
+	}
+}
 
-	// For every node of the graph 
+void Graph::ADJ(char vertex) {
+	int count = 0;
+	for (int i : adjMat.at(posOf(vertex))) {
+		if (i == 1) cout << map.at(count) << " ";
+		count++;
+	}
+}
+
+void Graph::BFS(int start, vector<bool>& visited) {
+	cout << map.at(start) << "->"; // print the current node 
+	int count = 0;
+	for (int i : adjMat.at(start)) {
+		if (i == 1) cout << map.at(count) << "->";
+		count++;
+	}
+	visited[start] = true; // Set current node as visited in bool vector
 	for (int i = 0; i < map.size(); i++) {
-
-		// If some node is adjacent to the current node 
-		// and it has not already been visited 
 		if (adjMat[start][i] == 1 && (!visited[i])) {
 			DFS(i, visited);
 		}

@@ -10,14 +10,16 @@ class Graph {
 private:
 	bool inMap;
 	vector <vector <int> > adjMat;
-	vector <char> map;
 public:
+	vector <char> map;
 	Graph();
 	void addNode(char);
 	int posOf(char);
 	void set(char, char);
 	void display();
 	void DFS(int, vector<bool>&);
+	void BFS(int, vector<bool>&);
+	void ADJ(char);
 };
 
 #endif
