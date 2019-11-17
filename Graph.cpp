@@ -65,6 +65,15 @@ void Graph::DFS(int start, vector<bool>& visited) {
 	}
 }
 
+void Graph::DFSutility(int start, vector<bool>& visited) {
+	visited[start] = true;
+	for (int i = 0; i < map.size(); i++) { // visit if not already visited
+		if (adjMat[start][i] == 1 && (!visited[i])) {
+			DFS(i, visited);
+		}
+	}
+}
+
 void Graph::ADJ(char vertex) {
 	int count = 0;
 	for (int i : adjMat.at(posOf(vertex))) {
@@ -89,4 +98,18 @@ void Graph::BFS(int start, vector<bool>& visited) {
 			}
 		}
 	} 
+}
+
+void Graph::connected() {
+	bool isConnected = true;
+	for (int i = 0; i < map.size(); i++) {
+		vector <bool> v1(map.size(), false);
+		DFSutility(i, v1);
+		for (bool r : v1) {
+			if (r == 1) isConnected = false;
+			break;
+		}
+	}
+	if (isConnected) cout << "Graph is connected" << endl;
+	else if (!isConnected) cout << "Graph is not connected" << endl; 
 }

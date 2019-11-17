@@ -18,8 +18,11 @@ public:
 	void set(char, char);
 	void display();
 	void DFS(int, vector<bool>&);
+	void DFSutility(int, vector<bool>&);
 	void BFS(int, vector<bool>&);
 	void ADJ(char);
+	void connected();
+
 };
 
 #endif

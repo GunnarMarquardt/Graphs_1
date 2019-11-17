@@ -74,7 +74,8 @@ int main()
 				break;
 			}
 			case (1960): {// Connected
-				cout << "call graphs::Connected function " << endl;
+				cout << endl;
+				graph.connected(); 
 			}
 			default: {
 				exit(0); 
