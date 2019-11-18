@@ -5,6 +5,7 @@ Thomas Evon && Gunnar Marquardt
 */
 #include <iostream>
 #include <fstream>
+#include <istream>
 #include <string>
 #include "Graph.h"
 
@@ -13,6 +14,8 @@ using namespace std;
 int main()
 {
 	ifstream input;
+	//istream dinger; 
+	string line; 
 	char buffChar;
 	char comChar;
 	char garbage;
@@ -21,14 +24,15 @@ int main()
 	input.open("graphs.txt");
 	while (input.is_open()) {
 		while (!input.eof()) {
-			input >> buffChar;
+			getline(input, line);
+			buffChar = line[0];
 			graph.addNode(buffChar);
-			input >> garbage;
-			input >> comChar;
-			while (comChar != ';') {
-				graph.addNode(comChar); // initializes everything as zero
-				graph.set(buffChar, comChar); // sets the ones
-				input >> comChar;
+			for (int i = 5; i < line.size(); i++) {
+				if (line[i] != ' ') {
+						comChar = line[i];
+						graph.addNode(comChar); // initializes everything as zero
+						graph.set(buffChar, comChar); // sets the ones
+				}
 			}
 		}
 		input.close();
@@ -74,7 +78,6 @@ int main()
 				break;
 			}
 			case (1960): {// Connected
-				cout << endl;
 				graph.connected(); 
 			}
 			default: {
